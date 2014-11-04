@@ -1,39 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JTextField;
-
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-
-import java.awt.Insets;
-
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-
-import java.awt.GridLayout;
-
-
-import java.awt.Panel;
-import java.awt.Color;
-import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import Model.Recipe;
-import Repositories.RecipeRepository;
 
 
 public class mainJFrame extends JFrame {
@@ -101,6 +66,7 @@ public class mainJFrame extends JFrame {
 		panel_1.add(txtSearch, gbc_txtSearch);
 		txtSearch.setColumns(10);
 		
+		
 		JButton btnNewButton = new JButton("Search");
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -108,6 +74,15 @@ public class mainJFrame extends JFrame {
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 0;
 		panel_1.add(btnNewButton, gbc_btnNewButton);
+		
+		//ActionListener Seach button
+		btnNewButton.addActionListener(new ActionListenerRecipe()
+		{
+		    public void actionPerformed(ActionEvent search)
+		    {
+		        System.out.println("Search Button clicked");
+		    }
+		});
 		
 		Panel panel_2 = new Panel();
 		panel_2.setBackground(new Color(0, 204, 102));
@@ -122,10 +97,35 @@ public class mainJFrame extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"All", "Italian", "Greek", "Persian"}));
 		panel_2.add(comboBox);
 		
+		//ActionListener combobox filter 
+		//ActionListener Combobox filter by cousine
+		comboBox.addActionListener(new ActionListenerRecipe()
+		{
+		    public void actionPerformed(ActionEvent filtercousine)
+		    {
+		     JComboBox comboBox = (JComboBox)filtercousine.getSource();
+		     String selectedFilter = (String)comboBox.getSelectedItem();
+		     System.out.println(selectedFilter);
+		    }
+		});
+		
+		
+		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"All", "<20 min", "<30 min", "<40 min"}));
 		panel_2.add(comboBox_1);
 		
+		//ActionListener combobox filter 
+		//ActionListener Combobox filter by time
+		comboBox_1.addActionListener(new ActionListenerRecipe()
+		{
+		    public void actionPerformed(ActionEvent filtertime)
+		    {
+		     JComboBox comboBox_1 = (JComboBox)filtertime.getSource();
+		     String selectedTimeFilter = (String)comboBox_1.getSelectedItem();
+		     System.out.println(selectedTimeFilter);
+		    }
+		});
 		
 		
 		Panel panel = new Panel();
@@ -136,7 +136,12 @@ public class mainJFrame extends JFrame {
 		gbc_panel.gridy = 2;
 		contentPane.add(panel, gbc_panel);
 		
+		
+	
+
+		
 		table = new JTable();
+		
 		table.setFillsViewportHeight(true);
 		DefaultTableModel model = new DefaultTableModel(
 				new Object[][] {
@@ -145,7 +150,7 @@ public class mainJFrame extends JFrame {
 					"Name",
 					"Cousine",
 					"Time Required"
-				}
+				}	
 			) {
 				Class[] columnTypes = new Class[] {
 					String.class,
@@ -159,8 +164,35 @@ public class mainJFrame extends JFrame {
 		
 		
 		table.setModel(model);
-		panel.add(table);
+		panel.setLayout(new BorderLayout());
+		panel.add(table, BorderLayout.CENTER);
+		panel.add(table.getTableHeader(), BorderLayout.NORTH);
+
+		//MouseListener for Table Column
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        int col = table.columnAtPoint(e.getPoint());
+		        String name = table.getColumnName(col);
+		        System.out.println("Column selected "+ name);
+		    }
+		});
 		
+
+		
+		//ActionListener table
+		// Gets the row nr for the clicked row
+		
+		table.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+				  System.out.println(row);
+
+			      // if appropriate column do this...
+			    
+			  }
+			});
 		
 		RecipeRepository recipeRepository = new RecipeRepository();
 		ArrayList<Recipe> allRecipes = recipeRepository.GetAll();
