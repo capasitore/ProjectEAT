@@ -113,6 +113,8 @@ public class mainJFrame extends JFrame {
 		    public void actionPerformed(ActionEvent search)
 		    {
 		        System.out.println("Search Button clicked");
+		         sqliteConnection.dbConnector();
+
 		    }
 		});
 		
