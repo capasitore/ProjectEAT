@@ -9,12 +9,12 @@ public class sqliteConnection {
 
 	
 	
-	public static Connection dbConnector()
+	public static Connection dbConnector(URL dbFilePath)
 	{
 		try{
 			Class.forName("org.sqlite.JDBC");
 //			Connection conn = DriverManager.getConnection("jdbc:sqlite:resource:projecteat.sqlite");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/andreas/Documents/workspace/ProjectEAT/bin/Resource/projecteat.sqlite");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFilePath);
 //			URL test = this.getClass().getResource("projecteat.sqlite");
 
 //			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + test);

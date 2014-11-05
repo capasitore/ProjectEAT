@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 
 import java.awt.GridBagConstraints;
+
 import javax.swing.JButton;
 
 import java.awt.Insets;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -112,9 +114,10 @@ public class mainJFrame extends JFrame {
 		{
 		    public void actionPerformed(ActionEvent search)
 		    {
-		        System.out.println("Search Button clicked");
-		        //for testing purpose
-		        sqliteConnection.dbConnector();
+		        System.out.println(this.getClass().getResource("Resource/projecteat.sqlite"));
+		        //for testing purposed
+		        URL dbFilePath = this.getClass().getResource("Resource/projecteat.sqlite");
+		        sqliteConnection.dbConnector(dbFilePath);
 		    }
 		});
 		
