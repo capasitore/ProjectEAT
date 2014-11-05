@@ -1,4 +1,36 @@
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.GridBagLayout;
+
+import javax.swing.JTextField;
+
+import java.awt.GridBagConstraints;
+import javax.swing.JButton;
+
+import java.awt.Insets;
+
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+
+import java.awt.Panel;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import DB.sqliteConnection;
+import Model.Recipe;
+import Repositories.RecipeRepository;
 
 
 public class mainJFrame extends JFrame {
