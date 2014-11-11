@@ -136,44 +136,17 @@ public class mainJFrame extends JFrame {
 		
 
 
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(153, 51, 0));
+			// RecipeList shows the recipe result from search
+		RecipeList recipeFrame = new RecipeList();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 2;
-		contentPane.add(panel, gbc_panel);
+		gbc_panel.weighty = 1;
+		gbc_panel.weightx = 1;
 
+		contentPane.add(recipeFrame, gbc_panel);
 
-
-
-		table = new JTable();
-
-		table.setFillsViewportHeight(true);
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-						"Name",
-						"Cousine",
-						"Time Required"
-				}	
-				) {
-			Class[] columnTypes = new Class[] {
-					String.class,
-					String.class,
-					String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		};
-
-
-		table.setModel(model);
-		panel.setLayout(new BorderLayout());
-		panel.add(table, BorderLayout.CENTER);
-		panel.add(table.getTableHeader(), BorderLayout.NORTH);
 
 		//MouseListener for Table Column
 		table.getTableHeader().addMouseListener(new TableEvent());
